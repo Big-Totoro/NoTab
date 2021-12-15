@@ -1,0 +1,146 @@
+:root {
+    --background-color: #000;
+    --text-color: #fff;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    line-height: 1.5;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/*img, picture, video, canvas, svg {*/
+/*    display: block;*/
+/*    max-width: 100%;*/
+/*}*/
+
+input, button, textarea, select {
+    font: inherit;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+    overflow-wrap: break-word;
+}
+
+#root, #__next {
+    isolation: isolate;
+}
+
+.wrapper {
+    width: 100%;
+    margin: 0 auto;
+    max-width: 1440px;
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    padding-top: 25px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    margin-left: 100px;
+}
+
+.login {
+    display: flex;
+    align-items: center;
+    text-decoration-color: #fff;
+    margin-left: 112px;
+
+    font-family: "Noto Sans", Arial, Helvetica, sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.login span {
+    margin-left: 14px;
+}
+
+.login-button {
+    color: var(--text-color);
+}
+
+h1 {
+    font-family: Montserrat, Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    font-size: 4rem;
+}
+
+.hero-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.hero-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.hero-info-caption h1 {
+    margin-left: 105px;
+    margin-top: 140px;
+    line-height: 1.1;
+}
+
+.hero-info-note {
+    display: flex;
+}
+
+.hero-info-note-text {
+    position: absolute;
+    display: flex;
+    margin-left: 105px;
+}
+
+.hero-info-text p {
+    font-family: "Noto Sans", Arial, Helvetica, sans-serif;
+    font-weight: 400;
+    font-size: 1.25rem;
+    margin-left: 32px;
+    margin-top: 138px;
+    max-width: 370px;
+    line-height: 1.3;
+}
+
+.hero-info .line {
+    margin-top: 100px;
+}
+
+.background-circle {
+    position: relative;
+    width: 125px;
+    height: 125px;
+    margin-top: 90px;
+    margin-left: 85px;
+    background: rgba(96, 92, 234, 1);
+    filter: blur(100px);
+}
+
+.hero-app img {
+    position: relative;
+    margin-top: -133px;
+}
