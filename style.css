@@ -275,7 +275,7 @@ h3 {
 }
 
 .our-mission-info p {
-    padding-top: 10px;
+    margin-top: 20px;
     max-width: 300px;
     line-height: 1.5;
 }
@@ -318,6 +318,7 @@ h3 {
 
 .id-scanner-info p {
     max-width: 315px;
+    margin-top: 20px;
 }
 
 .tool-integration {
@@ -337,7 +338,7 @@ h3 {
 }
 
 .tool-integration-info p {
-    margin-top: 40px;
+    margin-top: 20px;
     margin-left: 110px;
     max-width: 395px;
 }
@@ -352,4 +353,38 @@ h3 {
             url("./images/slide4-graph-spline.png") 350px 300px no-repeat,
             url("./images/slide4-graph-columns.png") 270px 400px no-repeat,
             url("./images/slide4-graph-gauges.png") 500px 490px no-repeat;
+}
+
+.qr-code {
+    display: flex;
+    height: 1100px;
+    background:
+            url("./images/slide5-music.png") no-repeat,
+            url("./images/slide5-glass.png") 778px 0 no-repeat;
+    margin-top: 100px;
+}
+
+.qr-code-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding-top: 400px;
+    padding-left: 150px;
+    max-width: 570px;
+}
+
+.qr-code-container p {
+    max-width: 315px;
+    margin-top: 20px;
+}
+
+.qr-code-container .app-badges {
+    margin-top: 50px;
+}
+
+.qr-code-apps {
+    flex: 2;
+    background:
+            url("./images/slide5-phone1.png") 20px 170px no-repeat,
+            url("./images/slide5-phone2.png") 470px 570px no-repeat;
 }
