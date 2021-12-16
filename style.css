@@ -360,7 +360,7 @@ h3 {
     height: 1100px;
     background:
             url("./images/slide5-music.png") no-repeat,
-            url("./images/slide5-glass.png") 778px 0 no-repeat;
+            url("./images/slide5-glass.png") no-repeat;
     margin-top: 100px;
 }
 
