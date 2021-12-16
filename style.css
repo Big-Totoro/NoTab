@@ -245,7 +245,7 @@ h3 {
 }
 
 .rotated-phone {
-    background-image: url("./images/PhoneRotated.png");
+    background-image: url("./images/phone-rotated.png");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: -90px -100px;
@@ -323,6 +323,7 @@ h3 {
 .tool-integration {
     display: flex;
     width: 100%;
+    height: 600px;
 }
 
 .tool-integration h2 {
@@ -347,5 +348,8 @@ h3 {
             url("./images/slide4-graph-line.png") 400px 10px no-repeat,
             url("./images/slide4-graph-circles.png") 220px 190px no-repeat,
             url("./images/slide4-graph-round.png") 530px 190px no-repeat,
-            url("./images/slide4-graph-line-color.png") 90px 260px no-repeat;
+            url("./images/slide4-graph-line-color.png") 90px 260px no-repeat,
+            url("./images/slide4-graph-spline.png") 350px 300px no-repeat,
+            url("./images/slide4-graph-columns.png") 270px 400px no-repeat,
+            url("./images/slide4-graph-gauges.png") 500px 490px no-repeat;
 }
