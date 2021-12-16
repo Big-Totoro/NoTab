@@ -1,4 +1,5 @@
 :root {
+    --screen-width: 1440px;
     --background-color: #000;
     --text-color: #fff;
     --border-color: rgba(255, 255, 255, .5);
@@ -67,7 +68,7 @@ h3 {
 .wrapper {
     width: 100%;
     margin: 0 auto;
-    max-width: 1440px;
+    max-width: var(--screen-width);
     background-color: var(--background-color);
     color: var(--text-color);
 }
@@ -77,8 +78,9 @@ h3 {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: 450px -100px;
+    overflow: hidden;
     position: absolute;
-    width: 100%;
+    width: var(--screen-width);
     height: 828px;
 }
 
@@ -246,7 +248,7 @@ h3 {
     background-image: url("./images/PhoneRotated.png");
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: -10px -100px;
+    background-position: -90px -100px;
     width: 800px;
     height: 1000px;
 }
@@ -255,18 +257,95 @@ h3 {
     height: 900px;
     display: flex;
     flex-direction: row;
-    padding-top: 100px;
+    padding-top: 80px;
 }
 
 .our-mission-info {
-    padding: 150px 80px;
+    padding: 150px 90px;
+    background-image: url("./images/bg_slide2.png");
+    background-repeat: no-repeat;
+    background-size: 285px 285px;
+    background-position: 200px 70px;
+
 }
 
 .our-mission-info h2 {
+    line-height: 1.4;
     max-width: 400px;
 }
 
 .our-mission-info p {
-    padding-top: 50px;
+    padding-top: 10px;
     max-width: 300px;
+    line-height: 1.5;
+}
+
+.id-scanner-background {
+    display: flex;
+    object-fit: cover;
+    background-position: center -20px;
+    background-image: url("./images/bg_slide3.png");
+    background-repeat: no-repeat;
+    width: var(--screen-width);
+    height: 1160px;
+    margin-top: 100px;
+}
+
+.verification-id-1 {
+    background-image: url("./images/slide3-phone1.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 332px;
+    height: 667px;
+    margin-top: 450px;
+    margin-left: 100px
+}
+
+.verification-id-2 {
+    background-image: url("./images/slide3-phone2.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 332px;
+    height: 667px;
+    margin-top: 450px;
+    margin-left: 50px
+}
+
+.id-scanner-info {
+    margin-top: 795px;
+    margin-left: 110px;
+}
+
+.id-scanner-info p {
+    max-width: 315px;
+}
+
+.tool-integration {
+    display: flex;
+    width: 100%;
+}
+
+.tool-integration h2 {
+    margin-top: 210px;
+    margin-left: 110px;
+    min-width: 500px;
+}
+
+.tool-integration-info {
+    flex: 1;
+}
+
+.tool-integration-info p {
+    margin-top: 40px;
+    margin-left: 110px;
+    max-width: 395px;
+}
+
+.tool-integration-tools {
+    flex: 2;
+    background:
+            url("./images/slide4-graph-line.png") 400px 10px no-repeat,
+            url("./images/slide4-graph-circles.png") 220px 190px no-repeat,
+            url("./images/slide4-graph-round.png") 530px 190px no-repeat,
+            url("./images/slide4-graph-line-color.png") 90px 260px no-repeat;
 }
