@@ -357,11 +357,13 @@ h3 {
 
 .qr-code {
     display: flex;
-    height: 1100px;
+    height: calc(1100px);
     background:
             url("./images/slide5-music.png") no-repeat,
             url("./images/slide5-glass.png") no-repeat;
     margin-top: 100px;
+    overflow: visible;
+    position: relative;
 }
 
 .qr-code-container {
@@ -387,4 +389,52 @@ h3 {
     background:
             url("./images/slide5-phone1.png") 20px 170px no-repeat,
             url("./images/slide5-phone2.png") 470px 570px no-repeat;
+    height: 1240px;
+}
+
+.generate-qr-code {
+    background:
+            url("./images/bg-slide6.png") 0 -240px no-repeat;
+    height: 1100px;
+    position: relative;
+}
+
+.generate-qr-code > .app-image {
+    position: absolute;
+    top: 215px;
+    left: 560px;
+}
+
+.generate-qr-code > .app-arrow {
+    position: absolute;
+    padding-left: 50px;
+    top: 405px;
+    left: 900px;
+}
+
+.scan-qr-code-style {
+    font-family: "Montserrat", Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    font-size: 21px;
+    line-height: 1.3;
+}
+
+.generate-qr-code > .scan-qr-code {
+    position: absolute;
+    top: 490px;
+    left: 1025px;
+}
+
+.generate-qr-code h2 {
+    max-width: 393px;
+    position: absolute;
+    top: 950px;
+    left: 50px;
+}
+
+.generate-qr-code p {
+    max-width: 292px;
+    position: absolute;
+    top: 970px;
+    right: 60px;
 }
