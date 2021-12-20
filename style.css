@@ -65,6 +65,12 @@ h3 {
     font-weight: 700;
 }
 
+h4 {
+    font-family: "Noto Sans", Arial, Helvetica, sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+}
+
 .wrapper {
     width: 100%;
     margin: 0 auto;
@@ -205,7 +211,6 @@ h3 {
 
 .contact-us-container {
     display: flex;
-
 }
 
 .border {
@@ -216,13 +221,13 @@ h3 {
     height: 312px;
 }
 
-.contact-us {
+.contact-us-container .contact-us {
     padding: 60px 70px;
     display: block;
     margin-right: 40px;
 }
 
-.contact-us div {
+.contact-us-container .contact-us div {
     margin-top: 30px;
 }
 
@@ -429,7 +434,7 @@ h3 {
     max-width: 393px;
     position: absolute;
     top: 950px;
-    left: 50px;
+    left: 100px;
 }
 
 .generate-qr-code p {
@@ -517,8 +522,9 @@ h3 {
 }
 
 .get-in-touch {
-    height: 1100px;
+    height: 1300px;
     position: relative;
+    background: url("./images/slide10-circle1.png") 940px 450px no-repeat;
 }
 
 .get-in-touch .background-circle {
@@ -619,4 +625,89 @@ h3 {
     background-color: var(--background-color);
     margin-top: 50px;
     margin-left: 205px;
+}
+
+.download-our-app {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    /*height: 400px;*/
+    width: 100%;
+    margin-top: 70px;
+}
+
+.download-our-app h4 {
+    text-align: center;
+}
+
+.download-our-app .app-badges {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 30px;
+}
+
+.download-our-app .appstore {
+    width: 260px;
+    height: 81px;
+}
+
+.download-our-app .google-play {
+    width: 293px;
+    height: 81px;
+}
+
+.download-our-app .app-badges img {
+    width: 100%;
+    height: 100%;
+}
+
+@font-face {
+    font-family: "Avenir Next LT W02 Regular";
+    src: url("./fonts/avenir.woff2") format("woff2");
+}
+
+footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    background: url("./images/footer-circle.png") -50px -300px var(--background-color) no-repeat;
+
+    font-family: "Avenir Next LT W02 Regular", Helvetica, Arial, sans-serif;
+    font-weight: 800;
+    font-size: 18px;
+    padding-bottom: 100px;
+}
+
+footer .contact-us {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-left: 100px;
+}
+
+footer .contact-us span {
+    margin-top: 15px;
+}
+
+footer .terms-of-use a:nth-child(2) {
+    margin-top: 30px;
+}
+
+footer .terms-of-use {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    height: 100%;
+    padding-right: 100px;
+}
+
+footer a {
+    color: var(--text-color);
+    text-decoration: none;
 }
