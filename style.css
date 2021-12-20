@@ -498,3 +498,125 @@ h3 {
     left: 492px;
     max-width: 285px;
 }
+
+.notab {
+    background:
+            url("./images/bg-slide8.png") no-repeat;
+    height: 1000px;
+    position: relative;
+}
+
+.notab::after {
+    content: "";
+    background: url("./images/slide8-phone.png") 100px 100px no-repeat;
+    position: absolute;
+    top: 280px;
+    left: 190px;
+    width: 960px;
+    height: 535px;
+}
+
+.get-in-touch {
+    height: 1100px;
+    position: relative;
+}
+
+.get-in-touch .background-circle {
+    background: url("./images/slide9-circle1.png") 0 0 250px 250px no-repeat;
+    top: -70px;
+    left: 250px;
+    width: 250px;
+    height: 250px;
+    opacity: .4;
+    position: absolute;
+}
+
+.get-in-touch-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.get-in-touch-info p {
+    max-width: 580px;
+    text-align: center;
+    padding-top: 10px;
+}
+
+.get-in-touch form {
+    margin: 60px auto 0;
+    max-width: 819px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-field-text {
+    font-family: "Noto Sans", Helvetica, Arial, sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.form-field-style {
+    height: 83px;
+    border-radius: 10px;
+    margin-top: 20px;
+    border-style: unset;
+}
+
+.form-field-style::placeholder {
+    color: #BFBFBF;
+}
+
+.form-field-style:required:invalid {
+    border: 1px solid red;
+}
+
+.one-field {
+    grid-column: 1 / 3;
+}
+
+.two-fields-left {
+    grid-column: 1/ 2;
+}
+
+.two-fields-right {
+    grid-column: 2/ 3;
+}
+
+.message {
+    min-width: 818px;
+    height: 200px;
+    border-radius: 10px;
+    margin-top: 20px;
+    border-style: unset;
+    padding: 20px;
+}
+
+.message::placeholder {
+    color: #BFBFBF;
+}
+
+.message:required:invalid {
+    border: 1px solid red;
+}
+
+.button {
+    max-width: 400px;
+    height: 80px;
+    font-family: "Montserrat", Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    font-size: 24px;
+    border: 1px solid #fff;
+    border-radius: 10px;
+    color: #fff;
+    background-color: var(--background-color);
+    margin-top: 50px;
+    margin-left: 205px;
+}
