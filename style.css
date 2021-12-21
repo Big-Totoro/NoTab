@@ -495,7 +495,7 @@ h4 {
 
 @media screen and (max-width: 1080px) {
     .our-mission-container {
-        height: 900px;
+        height: 815px;
         display: flex;
         flex-direction: column-reverse;
         padding-top: 0;
@@ -544,6 +544,20 @@ h4 {
     margin-top: 100px;
 }
 
+@media screen and (max-width: 1080px) {
+    .id-scanner-background {
+        display: flex;
+        flex-direction: column;
+        object-fit: cover;
+        background-position:0 -20px;
+        background-image: url("./images/bg_slide3-mobile.png");
+        background-repeat: no-repeat;
+        width: var(--mobile-width);
+        margin-top: 190px;
+        height: auto;
+    }
+}
+
 .verification-id-1 {
     background-image: url("./images/slide3-phone1.png");
     background-repeat: no-repeat;
@@ -552,6 +566,20 @@ h4 {
     height: 667px;
     margin-top: 450px;
     margin-left: 100px
+}
+
+@media screen and (max-width: 1080px) {
+    .verification-id-1 {
+        background-image: url("./images/slide3-phone1-mobile.png");
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+        width: 288px;
+        height: 576px;
+        margin-top: 70px;
+        margin-left: 44px;
+        order: 2;
+    }
 }
 
 .verification-id-2 {
@@ -564,14 +592,44 @@ h4 {
     margin-left: 50px
 }
 
+@media screen and (max-width: 1080px) {
+    .verification-id-2 {
+        background-image: url("./images/slide3-phone2.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+        width: 288px;
+        height: 576px;
+        margin-top: 55px;
+        margin-left: 44px;
+        order: 3;
+    }
+}
+
 .id-scanner-info {
     margin-top: 795px;
     margin-left: 110px;
 }
 
+@media screen and (max-width: 1080px) {
+    .id-scanner-info {
+        padding: 200px 15px 0 15px;
+        width: 100%;
+        margin-top: 0;
+        margin-left: 0;
+        order: 1;
+    }
+}
+
 .id-scanner-info p {
     max-width: 315px;
     margin-top: 20px;
+}
+
+@media screen and (max-width: 1080px) {
+    .id-scanner-info p {
+        max-width: 345px;
+        margin-top: 24px;
+    }
 }
 
 .tool-integration {
