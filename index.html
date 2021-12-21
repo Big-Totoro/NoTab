@@ -16,11 +16,17 @@
         <div class="top-background"></div>
         <header class="header">
             <a class="logo" href="#">
-                <img src="./images/logo.png" alt="Home page" />
-                <img src="./images/no-tab.png" alt="NoTab logo" />
+                <picture>
+                    <source srcset="./images/logo-mobile.png" media="(max-width: 1080px)">
+                    <img src="./images/logo.png" alt="Home page" />
+                </picture>
+                <picture>
+                    <source srcset="./images/no-tab-mobile.png" media="(max-width: 1080px)">
+                    <img src="./images/no-tab.png" alt="NoTab logo" />
+                </picture>
             </a>
             <a class="login login-button" href="#">
-                <img src="./images/avatar.svg" alt="Login button">
+                <img class="avatar" src="./images/avatar.svg" alt="Login button">
                 <span class="login-button">Login</span>
             </a>
         </header>
@@ -38,13 +44,16 @@
                                     <img class="line" src="./images/line.svg" alt="">
                                 </div>
                                 <div class="info-text hero-info-text ">
-                                    <p>NoTab allows bars & nightclubs to manage, understand, and grow <br>their business from a single dashboard</p>
+                                    <p>NoTab allows bars & nightclubs to manage, understand, and grow their business from a single dashboard</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="hero-app">
-                        <img src="./images/phone-332x667.png" alt="NoTab application on mobile device.">
+                        <picture>
+                            <source srcset="./images/hero-phone-mobile.png" media="(max-width: 1080px)">
+                            <img src="./images/hero-phone.png" alt="NoTab application on mobile device.">
+                        </picture>
                     </div>
                 </div>
                 <div class="download-app">
