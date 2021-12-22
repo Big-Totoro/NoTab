@@ -638,10 +638,25 @@ h4 {
     height: 600px;
 }
 
+@media screen and (max-width: 1080px) {
+    .tool-integration {
+        flex-direction: column;
+        height: 710px;
+        padding-top: 145px;
+    }
+}
+
 .tool-integration h2 {
     margin-top: 210px;
     margin-left: 110px;
     min-width: 500px;
+}
+
+@media screen and (max-width: 1080px) {
+    .tool-integration h2 {
+        margin-top: 145px;
+        margin-left: 15px;
+    }
 }
 
 .tool-integration-info {
@@ -654,16 +669,39 @@ h4 {
     max-width: 395px;
 }
 
+@media screen and (max-width: 1080px) {
+    .tool-integration-info p {
+        margin-top: 24px;
+        margin-left: 15px;
+        max-width: 340px;
+    }
+}
+
 .tool-integration-tools {
     flex: 2;
     background:
             url("./images/slide4-graph-line.png") 400px 10px no-repeat,
             url("./images/slide4-graph-circles.png") 220px 190px no-repeat,
+            url("./images/slide4-graph-spline.png") 350px 300px no-repeat,
             url("./images/slide4-graph-round.png") 530px 190px no-repeat,
             url("./images/slide4-graph-line-color.png") 90px 260px no-repeat,
-            url("./images/slide4-graph-spline.png") 350px 300px no-repeat,
             url("./images/slide4-graph-columns.png") 270px 400px no-repeat,
             url("./images/slide4-graph-gauges.png") 500px 490px no-repeat;
+}
+
+@media screen and (max-width: 1080px) {
+    .tool-integration-tools {
+        width: var(--mobile-width);
+        height: 500px;
+        flex: 2;
+        background:
+                url("./images/slide4-graph-line-mobile.png") -30px 159px no-repeat,
+                url("./images/slide4-graph-circles-mobile.png") 36px 83px no-repeat,
+                url("./images/slide4-graph-spline-mobile.png") 193px 66px no-repeat,
+                url("./images/slide4-graph-round-mobile.png") 279px 30px no-repeat,
+                url("./images/slide4-graph-columns-mobile.png") 134px 126px no-repeat,
+                url("./images/slide4-graph-gauges-mobile.png") 163px 217px no-repeat;
+    }
 }
 
 .qr-code {
