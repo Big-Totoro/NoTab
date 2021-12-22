@@ -1057,7 +1057,7 @@ h4 {
 
 @media screen and (max-width: 1080px) {
     .get-in-touch {
-        height: 1300px;
+        height: auto;
         position: relative;
         background: url("./images/slide10-circle1-mobile.png") 0 320px no-repeat;
     }
@@ -1318,6 +1318,20 @@ footer {
     position: relative;
 }
 
+@media screen and (max-width: 1080px) {
+    footer {
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+
+        padding: 80px 100px 25px;
+        position: relative;
+        z-index: 1;
+    }
+}
+
 footer::before {
     content: "";
     position: absolute;
@@ -1329,12 +1343,17 @@ footer::before {
     height: 561px;
 }
 
-footer .background {
-    background: url("./images/footer-circle.png") -50px -300px no-repeat;
-    width: 500px;
-    height: 500px;
-    position: absolute;
-    overflow: visible;
+@media screen and (max-width: 1080px) {
+    footer::before {
+        content: "";
+        position: absolute;
+        background: url("./images/footer-circle-mobile.png") -50px -50px no-repeat;
+        background-size: cover;
+        bottom: 0;
+        left: 0;
+        width: 637px;
+        height: 561px;
+    }
 }
 
 footer .contact-us {
@@ -1345,12 +1364,34 @@ footer .contact-us {
     z-index: 1;
 }
 
+@media screen and (max-width: 1080px) {
+    footer .contact-us {
+        justify-content: center;
+        align-items: center;
+        z-index: 1;
+        padding-top: 68px;
+    }
+}
+
 footer .contact-us span {
     margin-top: 15px;
 }
 
+@media screen and (max-width: 1080px) {
+    footer .contact-us span {
+        margin-top: 20px;
+        font-size: 14px;
+    }
+}
+
 footer .terms-of-use a:nth-child(2) {
     margin-top: 30px;
+}
+
+@media screen and (max-width: 1080px) {
+    footer .terms-of-use a:nth-child(2) {
+        margin-top: 14px;
+    }
 }
 
 footer .terms-of-use {
