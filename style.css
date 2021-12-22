@@ -770,8 +770,7 @@ h4 {
 }
 
 .qr-code-apps {
-    flex: 2;
-    background:
+    flex: 2;background:
             url("./images/slide5-phone1.png") 20px 170px no-repeat,
             url("./images/slide5-phone2.png") 470px 570px no-repeat;
     height: 1240px;
