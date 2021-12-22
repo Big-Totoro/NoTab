@@ -895,7 +895,7 @@ h4 {
 
 @media screen and (max-width: 1080px) {
     .easy-ordering {
-        height: 1350px;
+        height: 870px;
         background:
                 url("./images/slide7-phone-mobile.png") 0px 360px no-repeat,
                 url("./images/bg-slide7-mobile.png") 0 5px no-repeat;
@@ -1028,6 +1028,9 @@ h4 {
 }
 
 @media screen and (max-width: 1080px) {
+    .notab {
+        display: none;
+    }
 }
 
 .notab::after {
@@ -1041,6 +1044,9 @@ h4 {
 }
 
 @media screen and (max-width: 1080px) {
+    .notab::after {
+        display: none;
+    }
 }
 
 .get-in-touch {
@@ -1049,14 +1055,36 @@ h4 {
     background: url("./images/slide10-circle1.png") 940px 450px no-repeat;
 }
 
+@media screen and (max-width: 1080px) {
+    .get-in-touch {
+        height: 1300px;
+        position: relative;
+        background: url("./images/slide10-circle1-mobile.png") 0 320px no-repeat;
+    }
+}
+
 .get-in-touch .background-circle {
-    background: url("./images/slide9-circle1.png") 0 0 250px 250px no-repeat;
-    top: -70px;
-    left: 250px;
-    width: 250px;
-    height: 250px;
-    opacity: .4;
+    background: url("./images/slide9-circle1.png") 0 0 no-repeat;
+    top: -300px;
+    left: 100px;
+    width: 770px;
+    height: 770px;
+    opacity: 1;
     position: absolute;
+}
+
+@media screen and (max-width: 1080px) {
+    .get-in-touch .background-circle {
+        background-image: url("./images/slide9-circle1-mobile.png");
+        background-repeat: no-repeat;
+        background-size: 375px 775px;
+        top: -300px;
+        left: 0;
+        width: 375px;
+        height: 775px;
+        opacity: 1;
+        position: absolute;
+    }
 }
 
 .get-in-touch-info {
@@ -1065,12 +1093,21 @@ h4 {
     justify-content: center;
     align-items: center;
     margin-top: 50px;
+    z-index: 1;
 }
 
 .get-in-touch-info p {
     max-width: 580px;
     text-align: center;
     padding-top: 10px;
+}
+
+@media screen and (max-width: 1080px) {
+    .get-in-touch-info p {
+        max-width: 325px;
+        text-align: center;
+        padding-top: 24px;
+    }
 }
 
 .get-in-touch form {
@@ -1083,12 +1120,32 @@ h4 {
     justify-content: center;
 }
 
+@media screen and (max-width: 1080px) {
+    .get-in-touch form {
+        margin: 49px auto 0;
+        max-width: 345px;
+        display: grid;
+        grid-template-columns: 1fr;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
 .form-field-text {
     font-family: "Noto Sans", Helvetica, Arial, sans-serif;
     font-weight: 400;
     font-size: 18px;
     padding-left: 20px;
     padding-right: 20px;
+    z-index: 1;
+}
+
+@media screen and (max-width: 1080px) {
+    .form-field-text {
+        font-size: 16px;
+        padding-left: 13px;
+        padding-right: 13px;
+    }
 }
 
 .form-field-style {
@@ -1096,6 +1153,14 @@ h4 {
     border-radius: 10px;
     margin-top: 20px;
     border-style: unset;
+}
+
+@media screen and (max-width: 1080px) {
+    .form-field-style {
+        height: 57px;
+        margin-top: 16px;
+        border-style: unset;
+    }
 }
 
 .form-field-style::placeholder {
@@ -1118,6 +1183,21 @@ h4 {
     grid-column: 2/ 3;
 }
 
+@media screen and (max-width: 1080px) {
+    .one-field {
+        grid-column: 1 / 2;
+    }
+
+    .two-fields-left {
+        grid-column: 1/ 2;
+    }
+
+
+    .two-fields-right {
+        grid-column: 1/ 2;
+    }
+}
+
 .message {
     min-width: 818px;
     height: 200px;
@@ -1125,6 +1205,17 @@ h4 {
     margin-top: 20px;
     border-style: unset;
     padding: 20px;
+}
+
+@media screen and (max-width: 1080px) {
+    .message {
+        min-width: 345px;
+        height: 140px;
+        border-radius: 10px;
+        margin-top: 16px;
+        border-style: unset;
+        padding: 15px;
+    }
 }
 
 .message::placeholder {
@@ -1149,12 +1240,21 @@ h4 {
     margin-left: 205px;
 }
 
+@media screen and (max-width: 1080px) {
+    .button {
+        max-width: 345px;
+        height: 80px;
+        margin-top: 40px;
+        margin-left: 0;
+        background-color: unset;
+    }
+}
+
 .download-our-app {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-content: center;
-    /*height: 400px;*/
     width: 100%;
     margin-top: 70px;
 }
@@ -1176,9 +1276,23 @@ h4 {
     height: 81px;
 }
 
+@media screen and (max-width: 1080px) {
+    .download-our-app .appstore {
+        width: 185px;
+        height: 60px;
+    }
+}
+
 .download-our-app .google-play {
     width: 293px;
     height: 81px;
+}
+
+@media screen and (max-width: 1080px) {
+    .download-our-app .google-play {
+        width: 185px;
+        height: 60px;
+    }
 }
 
 .download-our-app .app-badges img {
