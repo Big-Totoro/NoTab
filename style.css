@@ -793,10 +793,27 @@ h4 {
     position: relative;
 }
 
+@media screen and (max-width: 1080px) {
+    .generate-qr-code {
+        background:
+                url("./images/bg-slide6-mobile.png") 0 350px no-repeat;
+        height: 860px;
+        position: relative;
+    }
+}
+
 .generate-qr-code > .app-image {
     position: absolute;
     top: 215px;
     left: 560px;
+}
+
+@media screen and (max-width: 1080px) {
+    .generate-qr-code > .app-image {
+        position: absolute;
+        top: 390px;
+        left: 95px;
+    }
 }
 
 .generate-qr-code > .app-arrow {
@@ -804,6 +821,16 @@ h4 {
     padding-left: 50px;
     top: 405px;
     left: 900px;
+}
+
+@media screen and (max-width: 1080px) {
+    .generate-qr-code > .app-arrow {
+        position: absolute;
+        padding-left: 0;
+        top: 715px;
+        left: 270px;
+        transform: rotateZ(40deg);
+    }
 }
 
 .scan-qr-code-style {
@@ -819,6 +846,14 @@ h4 {
     left: 1025px;
 }
 
+@media screen and (max-width: 1080px) {
+    .generate-qr-code > .scan-qr-code {
+        position: absolute;
+        top: 820px;
+        left: 180px;
+    }
+}
+
 .generate-qr-code h2 {
     max-width: 393px;
     position: absolute;
@@ -826,11 +861,26 @@ h4 {
     left: 100px;
 }
 
+@media screen and (max-width: 1080px) {
+    .generate-qr-code h2 {
+        top: 200px;
+        left: 15px;
+    }
+}
+
 .generate-qr-code p {
     max-width: 292px;
     position: absolute;
     top: 970px;
     right: 60px;
+}
+
+@media screen and (max-width: 1080px) {
+    .generate-qr-code p {
+        max-width: 300px;
+        top: 260px;
+        left: 15px;
+    }
 }
 
 .easy-ordering {
@@ -843,6 +893,17 @@ h4 {
     position: relative;
 }
 
+@media screen and (max-width: 1080px) {
+    .easy-ordering {
+        height: 1350px;
+        background:
+                url("./images/slide7-phone-mobile.png") 0px 360px no-repeat,
+                url("./images/bg-slide7-mobile.png") 0 5px no-repeat;
+        padding-top: 115px;
+        position: relative;
+    }
+}
+
 .easy-ordering-info {
     display: flex;
     justify-content: flex-end;
@@ -851,18 +912,48 @@ h4 {
     padding-right: 100px;
 }
 
+.easy-ordering-info p {
+    padding-top: 25px;
+}
+
+@media screen and (max-width: 1080px) {
+    .easy-ordering-info {
+        display: block;
+        width: 100%;
+        position: relative;
+        padding-left: 15px;
+        padding-right: 0;
+    }
+}
+
 .box-content-style {
     font-family: Roboto, Arial, Helvetica, sans-serif;
     font-weight: 500;
     font-size: 22px;
 }
 
+@media screen and (max-width: 1080px) {
+    .box-content-style {
+        font-family: Roboto, Arial, Helvetica, sans-serif;
+        font-weight: 500;
+        font-size: 14px;
+    }
+}
+
 .border-rect {
     border: 1px solid var(--border-color);
-    box-sizing: border-box;
     border-radius: 18px;
     padding: 20px 20px;
     background-color: black;
+}
+
+@media screen and (max-width: 1080px) {
+    .border-rect {
+        border: 1px solid var(--border-color);
+        border-radius: 10px;
+        padding: 15px 15px;
+        background-color: black;
+    }
 }
 
 .no-more1 {
@@ -872,11 +963,29 @@ h4 {
     max-width: 285px;
 }
 
+@media screen and (max-width: 1080px) {
+    .no-more1 {
+        position: absolute;
+        top: 290px;
+        left: 39px;
+        max-width: 173px;
+    }
+}
+
 .no-more2 {
     position: absolute;
     top: 708px;
     left: 255px;
     max-width: 285px;
+}
+
+@media screen and (max-width: 1080px) {
+    .no-more2 {
+        position: absolute;
+        top: 395px;
+        left: 189px;
+        max-width: 173px;
+    }
 }
 
 .no-more-split {
@@ -886,6 +995,15 @@ h4 {
     max-width: 185px;
 }
 
+@media screen and (max-width: 1080px) {
+    .no-more-split {
+        position: absolute;
+        top: 785px;
+        left: 238px;
+        width: 120px;
+    }
+}
+
 .skip-the-line {
     position: absolute;
     top: 1078px;
@@ -893,11 +1011,23 @@ h4 {
     max-width: 285px;
 }
 
+@media screen and (max-width: 1080px) {
+    .skip-the-line {
+        position: absolute;
+        top: 700px;
+        left: 30px;
+        max-width: 285px;
+    }
+}
+
 .notab {
     background:
             url("./images/bg-slide8.png") no-repeat;
     height: 1000px;
     position: relative;
+}
+
+@media screen and (max-width: 1080px) {
 }
 
 .notab::after {
@@ -908,6 +1038,9 @@ h4 {
     left: 190px;
     width: 960px;
     height: 535px;
+}
+
+@media screen and (max-width: 1080px) {
 }
 
 .get-in-touch {
