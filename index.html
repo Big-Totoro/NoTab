@@ -8,11 +8,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Noto+Sans+Display:wght@400;500;700;800&family=Roboto:wght@500&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./cookie-popup/cookie-popup.css">
 
     <title>No Tab</title>
 </head>
 <body>
     <div class="wrapper">
+        <div id="cookie-popup">
+            <p class="description">We use cookie to improve your experience on our site. By using our site you consent cookies.</p>
+            <button class="ok-button" aria-label="Close Cookie popup" onclick="closeCookiePopup();">OK</button>
+        </div>
         <div class="top-background"></div>
         <header class="header">
             <a class="logo" href="#">
@@ -213,5 +218,7 @@
             </footer>
         </main>
     </div>
+
+    <script src="./cookie-popup/cookie-popup.js"></script>
 </body>
 </html>

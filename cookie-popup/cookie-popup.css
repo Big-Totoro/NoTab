@@ -1,0 +1,61 @@
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+#cookie-popup {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: "Noto Sans", Helvetica, Arial, sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+
+    background-color: #212834;
+    width: 1440px;
+    height: 93px;
+    padding-left: 100px;
+    padding-right: 25px;
+
+    z-index: 999;
+    position: fixed;
+    overflow: hidden;
+    bottom: 30px;
+}
+
+@media screen and (max-width: 1280px) {
+    #cookie-popup {
+        width: 375px;
+        height: 93px;
+        padding-left: 15px;
+        padding-right: 22px;
+    }
+
+    #cookie-popup p {
+        max-width: 230px;
+    }
+}
+
+.ok-button {
+    background-color: rgba(255, 255, 255, .1);
+    border: 1px solid #ffffff;
+    border-radius: 6px;
+    width: 132px;
+    height: 50px;
+    text-align: center;
+    color: #fff;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 1280px) {
+    .ok-button {
+        width: 92px;
+        height: 50px;
+    }
+}
