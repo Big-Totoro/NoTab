@@ -487,9 +487,8 @@ h4 {
     height: 900px;
     display: flex;
     flex-direction: row;
-    justify-content: center;
     align-items: center;
-    padding-top: 80px;
+    padding: 80px 0 0 0;
     width: 100%;
 }
 
