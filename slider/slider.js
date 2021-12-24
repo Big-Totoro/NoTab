@@ -15,6 +15,7 @@ function showNextSlide(index, direction) {
     } else {
         slides[index - direction].classList.remove("active");
         slides[index].classList.add("active");
+
     }
 
     return index;
