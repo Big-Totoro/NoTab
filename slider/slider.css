@@ -41,7 +41,7 @@ p, h1, h2, h3, h4, h5, h6 {
     padding: 5rem;
 }
 
-.container {
+.slider-container {
     position: relative;
     overflow: hidden;
     display: flex;
@@ -85,6 +85,7 @@ p, h1, h2, h3, h4, h5, h6 {
     font-size:5rem;
     color: white;
     text-align: center;
+    display: none;
 }
 
 .slide1 {
@@ -105,4 +106,8 @@ p, h1, h2, h3, h4, h5, h6 {
 
 .slide5 {
     background-color: #883dfc;
+}
+
+.active {
+    display: block;
 }

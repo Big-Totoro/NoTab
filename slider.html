@@ -8,10 +8,10 @@
 </head>
 <body>
     <div class="wrapper">
-        <div class="container">
-            <button class="prev"></button>
+        <div class="slider-container">
+            <button class="prev" onclick="prevButtonClick();"></button>
             <div class="slider">
-                <div class="slide1 slide">
+                <div class="slide1 slide active">
                     <span>1</span>
                 </div>
                 <div class="slide2 slide">
@@ -27,8 +27,10 @@
                     <span>5</span>
                 </div>
             </div>
-            <button class="next"></button>
+            <button class="next" onclick="nextButtonClick();"></button>
         </div>
     </div>
+
+    <script src="./slider/slider.js"></script>
 </body>
 </html>
