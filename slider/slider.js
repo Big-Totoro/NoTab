@@ -1,8 +1,18 @@
 const track = document.querySelector(".slider .track");
+const stepTo = 10;
+const intervalValue = 10;
 let index = 1;
 
 function getSlides() {
     return document.querySelectorAll(".slider .slide");
+}
+
+function enableButtons(enabled) {
+    const prevButton = document.querySelector(".prev");
+    const nextButton = document.querySelector(".next");
+
+    prevButton.disabled = !enabled;
+    nextButton.disabled = !enabled;
 }
 
 function prevButtonHandler() {
@@ -14,8 +24,22 @@ function prevButtonHandler() {
         track.style.transform = `translateX(${-slideWidth * index}px)`;
     }
 
-    --index;
-    track.style.transform = `translateX(${-slideWidth * index}px)`;
+    enableButtons(false);
+
+    let step = 1;
+    let intervalHandle = setInterval(() => {
+        if (step >= slideWidth) {
+            clearInterval(intervalHandle);
+
+            enableButtons(true);
+            --index;
+            track.style.transform = `translateX(${-slideWidth * index}px)`;
+
+            return;
+        }
+        step += stepTo;
+        track.style.transform = `translateX(${-(slideWidth * index) + step}px)`;
+    }, intervalValue);
 }
 
 function nextButtonHandler() {
@@ -27,8 +51,22 @@ function nextButtonHandler() {
         track.style.transform = `translateX(${-slideWidth * index}px)`;
     }
 
-    ++index;
-    track.style.transform = `translateX(${-slideWidth * index}px)`;
+    enableButtons(false);
+
+    let step = 1;
+    let intervalHandle = setInterval(() => {
+        if (step >= slideWidth) {
+            clearInterval(intervalHandle);
+
+            enableButtons(true);
+            ++index;
+            track.style.transform = `translateX(${-(slideWidth * index)}px)`;
+
+            return;
+        }
+        step += stepTo;
+        track.style.transform = `translateX(${-(slideWidth * index) - step}px)`;
+    }, intervalValue);
 }
 
 function initSlider() {
