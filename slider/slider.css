@@ -1,7 +1,9 @@
 :root {
-    --slider-container-width: 800px;
+    --slider-width: 800px;
+    --slider-height: 200px;
     --buttons-width: 50px;
-    --slider-width: calc(var(--slider-container-width) - var(--buttons-width) - var(--buttons-width));
+    --slider-container-width: calc(var(--slider-width) - var(--buttons-width) - var(--buttons-width));
+    --slide-width: var(--slider-container-width);
 }
 
 *,
@@ -41,25 +43,33 @@ p, h1, h2, h3, h4, h5, h6 {
     padding: 5rem;
 }
 
-.slider-container {
-    position: relative;
-    overflow: hidden;
+.slider {
     display: flex;
+    width: var(--slider-width);
+    height: var(--slider-height);
+    overflow: hidden;
+    margin: 20px auto;
+}
+
+.track {
+    clear: both;
+    height: 100%;
+    overflow: hidden;
     width: var(--slider-container-width);
 }
 
-.slider {
+.container {
     display: block;
     background-color: #6500ff;
-    height: 10rem;
-    flex: 10;
-    width: var(--slider-width);
+    width: var(--slider-container-width);
+    height: var(--slider-height);
+    overflow: hidden;
 }
 
 .prev,
 .next {
     width: var(--buttons-width);
-    height: 10rem;
+    height: var(--slider-height);
     flex: 1;
     border: 1px solid black;
     cursor: pointer;
@@ -81,12 +91,13 @@ p, h1, h2, h3, h4, h5, h6 {
 }
 
 .slide {
-    padding: 1rem;
+    padding: 1.6rem;
     font-size:5rem;
     color: white;
     text-align: center;
-    display: none;
-    height: 100%;
+    width: var(--slider-container-width);
+    height: var(--slider-height);
+    float: left;
 }
 
 .slide1 {
@@ -107,8 +118,4 @@ p, h1, h2, h3, h4, h5, h6 {
 
 .slide5 {
     background-color: #883dfc;
-}
-
-.active {
-    display: block;
 }

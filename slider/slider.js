@@ -1,32 +1,56 @@
-const BACKWARD = -1;
-const FORWARD = 1;
-const slides = document.querySelectorAll(".slider-container .slide");
-let currentSlide = 0;
+const track = document.querySelector(".slider .track");
+let index = 1;
 
-function showNextSlide(index, direction) {
-    if (index < 0) {
-        index = slides.length - 1;
-        slides[0].classList.remove("active");
-        slides[index].classList.add("active");
-    } else if (index === slides.length) {
-        slides[index - 1].classList.remove("active");
-        slides[0].classList.add("active");
-        index = 0;
-    } else {
-        slides[index - direction].classList.remove("active");
-        slides[index].classList.add("active");
+function getSlides() {
+    return document.querySelectorAll(".slider .slide");
+}
 
+function prevButtonHandler() {
+    const slides = getSlides();
+    const slideWidth = slides[0].clientWidth;
+
+    if (slides[index].id === 'last-clone') {
+        index = slides.length - 2;
+        track.style.transform = `translateX(${-slideWidth * index}px)`;
     }
 
-    return index;
+    --index;
+    track.style.transform = `translateX(${-slideWidth * index}px)`;
 }
 
-function prevButtonClick() {
-    --currentSlide;
-    currentSlide = showNextSlide(currentSlide, BACKWARD);
+function nextButtonHandler() {
+    const slides = getSlides();
+    const slideWidth = slides[0].clientWidth;
+
+    if (slides[index].id === 'first-clone') {
+        index = 1;
+        track.style.transform = `translateX(${-slideWidth * index}px)`;
+    }
+
+    ++index;
+    track.style.transform = `translateX(${-slideWidth * index}px)`;
 }
 
-function nextButtonClick() {
-    ++currentSlide;
-    currentSlide = showNextSlide(currentSlide, FORWARD);
+function initSlider() {
+    const slides = getSlides();
+    const slideWidth = slides[0].clientWidth;
+
+    const firstClone = slides[0].cloneNode(true);
+    firstClone.id = "first-clone";
+    track.append(firstClone);
+
+    const lastClone = slides[slides.length - 1].cloneNode(true);
+    lastClone.id = "last-clone";
+    track.prepend(lastClone);
+
+    track.style.width = `${slideWidth * slides.length + slideWidth  + slideWidth}px`;
+    track.style.transform = `translateX(${-slideWidth}px)`;
+
+    const prevButton = document.querySelector(".prev");
+    prevButton.addEventListener("click", prevButtonHandler);
+
+    const nextButton = document.querySelector(".next");
+    nextButton.addEventListener("click", nextButtonHandler);
 }
+
+window.onload = () => initSlider();
