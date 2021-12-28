@@ -1,7 +1,7 @@
 const track = document.querySelector(".slider .track");
 const firstCloneId = 'first-clone';
 const lastCloneId = 'last-clone';
-const stepTo = 30;
+let stepTo = 30;
 const intervalValue = 10;
 let index = 1;
 
@@ -56,6 +56,8 @@ function prevButtonHandler() {
     enableButtons(false);
 
     let step = 1;
+    stepTo = (stepTo < 0) ? -stepTo : stepTo;
+
     let intervalHandle = setInterval(() => {
         if (step >= slideWidth) {
             clearInterval(intervalHandle);
@@ -91,6 +93,8 @@ function nextButtonHandler() {
     enableButtons(false);
 
     let step = 1;
+    stepTo = (stepTo < 0) ? -stepTo : stepTo;
+
     let intervalHandle = setInterval(() => {
         if (step >= slideWidth) {
             clearInterval(intervalHandle);
@@ -117,13 +121,61 @@ function dotButtonHandler(e) {
     if (e.currentTarget.id == index) {
         return;
     }
-    const currentDot = getActiveDot();
-    resetDot(currentDot);
-    setDotActive(e.currentTarget);
+
+    resetDots();
+    setDotActive(e.currentTarget.id);
+
+    let diff = e.currentTarget.id - index;
+    moveTo(diff);
 }
 
-function updateDots(index) {
+function moveTo(indexDiff) {
+    const slides = getSlides();
+    const slideWidth = slides[0].clientWidth;
 
+    if (slides[index].id === firstCloneId) {
+        index = 1;
+        setDotActive(index);
+        track.style.transform = `translateX(${-slideWidth * index}px)`;
+    } else if (slides[index].id === lastCloneId) {
+        index = slides.length - 2;
+        setDotActive(index);
+        track.style.transform = `translateX(${-slideWidth * index}px)`;
+    }
+
+    enableButtons(false);
+
+    let step = 1;
+    if (indexDiff < 0) {
+        step = -1;
+        stepTo = -stepTo;
+    } else {
+        step = 1;
+        stepTo = (stepTo < 0) ? -stepTo : stepTo;
+    }
+
+    let intervalHandle = setInterval(() => {
+        if (Math.abs(step) >= Math.abs(indexDiff) * slideWidth) {
+            clearInterval(intervalHandle);
+
+            enableButtons(true);
+            resetDots();
+
+            index += indexDiff;
+            if (index == 0) {
+                setDotActive(slides.length - 2);
+            } else if (index == slides.length - 1) {
+                setDotActive(1);
+            } else {
+                setDotActive(index);
+            }
+            track.style.transform = `translateX(${-(slideWidth * index)}px)`;
+
+            return;
+        }
+        step += stepTo;
+        track.style.transform = `translateX(${-(slideWidth * index) - step}px)`;
+    }, intervalValue);
 }
 
 function initSlides() {
