@@ -45,6 +45,13 @@ p, h1, h2, h3, h4, h5, h6 {
 
 .slider {
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.content {
+    display: flex;
     width: var(--slider-width);
     height: var(--slider-height);
     overflow: hidden;
@@ -118,4 +125,27 @@ p, h1, h2, h3, h4, h5, h6 {
 
 .slide5 {
     background-color: #883dfc;
+}
+
+.dots-line {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    text-align: center;
+    width: 100%;
+}
+
+.dots-line .dot {
+    cursor: pointer;
+    width: 8px;
+    height: 8px;
+    background: gray;
+    border-radius: 50%;
+    margin: 0 5px;
+}
+
+.dots-line .dot-active {
+    background: #3f3f3f;
+    cursor: default;
 }
