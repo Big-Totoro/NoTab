@@ -65,6 +65,10 @@ class Slider {
         this.#track.style.transform = `translateX(${-slideWidth * slideIndex}px)`;
     }
 
+    #moveSlideWithStep(slideWidth, slideIndex, step) {
+        this.#track.style.transform = `translateX(${-(slideWidth * this.#index) + step}px)`;
+    }
+
     #moveStep(buttonType) {
         const slides = this.#getSlides();
         const slideWidth = slides[0].clientWidth;
@@ -114,9 +118,9 @@ class Slider {
                 return;
             }
             if (buttonType == PREV_BUTTON) {
-                this.#track.style.transform = `translateX(${-(slideWidth * this.#index) + step}px)`;
+                this.#moveSlideWithStep(slideWidth, this.#index, step);
             } else {
-                this.#track.style.transform = `translateX(${-(slideWidth * this.#index) - step}px)`;
+                this.#moveSlideWithStep(slideWidth, this.#index, -step);
             }
         }, INTERVAL_DELAY);
     }
@@ -186,7 +190,7 @@ class Slider {
 
                 return;
             }
-            this.#track.style.transform = `translateX(${-(slideWidth * this.#index) - step}px)`;
+            this.#moveSlideWithStep(slideWidth, this.#index, -step);
         }, INTERVAL_DELAY);
     }
 
