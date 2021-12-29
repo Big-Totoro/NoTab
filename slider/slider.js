@@ -1,3 +1,5 @@
+const PREV_BUTTON = 1;
+const NEXT_BUTTON = 2;
 const FIRST_CLONE_ID = 'first-clone';
 const LAST_CLONE_ID = 'last-clone';
 const STEP_TO = 30;
@@ -59,53 +61,22 @@ class Slider {
         }
     }
 
-    prevButtonHandler = (e) => {
-        const slides = this.#getSlides();
-        const slideWidth = slides[0].clientWidth;
-
-        if (slides[this.#index].id === LAST_CLONE_ID) {
-            this.#index = slides.length - 2;
-            this.#setDotActive(this.#index);
-            this.#track.style.transform = `translateX(${-slideWidth * this.#index}px)`;
-        }
-
-        this.#enableControlButtons(false);
-        this.#enableDots(false);
-
-        let step = 1;
-        let stepTo = STEP_TO;
-
-        let intervalHandle = setInterval(() => {
-            step += stepTo;
-            if (step >= slideWidth) {
-                clearInterval(intervalHandle);
-
-                this.#enableControlButtons(true);
-                this.#enableDots(true);
-                this.#resetDots();
-
-                --this.#index;
-                if (this.#index == 0) {
-                    this.#setDotActive(slides.length - 2);
-                } else {
-                    this.#setDotActive(this.#index);
-                }
-                this.#track.style.transform = `translateX(${-slideWidth * this.#index}px)`;
-
-                return;
-            }
-            this.#track.style.transform = `translateX(${-(slideWidth * this.#index) + step}px)`;
-        }, INTERVAL_DELAY);
+    #moveSlide(slideWidth, slideIndex) {
+        this.#track.style.transform = `translateX(${-slideWidth * slideIndex}px)`;
     }
 
-    nextButtonHandler = (e) => {
+    #moveStep(buttonType) {
         const slides = this.#getSlides();
         const slideWidth = slides[0].clientWidth;
 
         if (slides[this.#index].id === FIRST_CLONE_ID) {
             this.#index = 1;
             this.#setDotActive(this.#index);
-            this.#track.style.transform = `translateX(${-slideWidth * this.#index}px)`;
+            this.#moveSlide(slideWidth, this.#index);
+        } else if (slides[this.#index].id === LAST_CLONE_ID) {
+            this.#index = slides.length - 2;
+            this.#setDotActive(this.#index);
+            this.#moveSlide(slideWidth, this.#index);
         }
 
         this.#enableControlButtons(false);
@@ -123,18 +94,39 @@ class Slider {
                 this.#enableDots(true);
                 this.#resetDots();
 
-                ++this.#index;
-                if (this.#index == slides.length - 1) {
-                    this.#setDotActive(1);
+                if (buttonType == PREV_BUTTON) {
+                    --this.#index;
+                    if (this.#index == 0) {
+                        this.#setDotActive(slides.length - 2);
+                    } else {
+                        this.#setDotActive(this.#index);
+                    }
                 } else {
-                    this.#setDotActive(this.#index);
+                    ++this.#index;
+                    if (this.#index == slides.length - 1) {
+                        this.#setDotActive(1);
+                    } else {
+                        this.#setDotActive(this.#index);
+                    }
                 }
-                this.#track.style.transform = `translateX(${-(slideWidth * this.#index)}px)`;
+                this.#track.style.transform = `translateX(${-slideWidth * this.#index}px)`;
 
                 return;
             }
-            this.#track.style.transform = `translateX(${-(slideWidth * this.#index) - step}px)`;
+            if (buttonType == PREV_BUTTON) {
+                this.#track.style.transform = `translateX(${-(slideWidth * this.#index) + step}px)`;
+            } else {
+                this.#track.style.transform = `translateX(${-(slideWidth * this.#index) - step}px)`;
+            }
         }, INTERVAL_DELAY);
+    }
+
+    prevButtonHandler = (e) => {
+        this.#moveStep(PREV_BUTTON);
+    }
+
+    nextButtonHandler = (e) => {
+        this.#moveStep(NEXT_BUTTON);
     }
 
     dotButtonHandler = (e) => {
