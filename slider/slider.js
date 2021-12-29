@@ -1,15 +1,15 @@
 const track = document.querySelector(".slider .track");
-const firstCloneId = 'first-clone';
-const lastCloneId = 'last-clone';
-let stepTo = 30;
-const intervalValue = 10;
+const FIRST_CLONE_ID = 'first-clone';
+const LAST_CLONE_ID = 'last-clone';
+const STEP_TO = 30;
+const INTERVAL_DELAY = 10;
 let index = 1;
 
 function getSlides() {
     return document.querySelectorAll(".slider .slide");
 }
 
-function enableButtons(enabled) {
+function enableControlButtons(enabled) {
     const prevButton = document.querySelector(".prev");
     const nextButton = document.querySelector(".next");
 
@@ -23,10 +23,6 @@ function getDot(index) {
 
 function getDots() {
     return [...document.querySelectorAll(".dots-line .dot")];
-}
-
-function getActiveDot() {
-    return document.querySelector(".dots-line .dot-active");
 }
 
 function resetDots() {
@@ -43,26 +39,36 @@ function setDotActive(index) {
     }
 }
 
+function enableDots(enabled) {
+    const dots = [...getDots()];
+    const pointerEvent = (enabled) ? "auto" : "none";
+    if (dots) {
+        dots.map(dot => dot.style.pointerEvents = pointerEvent);
+    }
+}
+
 function prevButtonHandler() {
     const slides = getSlides();
     const slideWidth = slides[0].clientWidth;
 
-    if (slides[index].id === lastCloneId) {
+    if (slides[index].id === LAST_CLONE_ID) {
         index = slides.length - 2;
         setDotActive(index);
         track.style.transform = `translateX(${-slideWidth * index}px)`;
     }
 
-    enableButtons(false);
+    enableControlButtons(false);
+    enableDots(false);
 
     let step = 1;
-    stepTo = (stepTo < 0) ? -stepTo : stepTo;
+    let stepTo = STEP_TO;
 
     let intervalHandle = setInterval(() => {
         if (step >= slideWidth) {
             clearInterval(intervalHandle);
 
-            enableButtons(true);
+            enableControlButtons(true);
+            enableDots(true);
             resetDots();
 
             --index;
@@ -77,29 +83,31 @@ function prevButtonHandler() {
         }
         step += stepTo;
         track.style.transform = `translateX(${-(slideWidth * index) + step}px)`;
-    }, intervalValue);
+    }, INTERVAL_DELAY);
 }
 
 function nextButtonHandler() {
     const slides = getSlides();
     const slideWidth = slides[0].clientWidth;
 
-    if (slides[index].id === firstCloneId) {
+    if (slides[index].id === FIRST_CLONE_ID) {
         index = 1;
         setDotActive(index);
         track.style.transform = `translateX(${-slideWidth * index}px)`;
     }
 
-    enableButtons(false);
+    enableControlButtons(false);
+    enableDots(false);
 
     let step = 1;
-    stepTo = (stepTo < 0) ? -stepTo : stepTo;
+    let stepTo = STEP_TO;
 
     let intervalHandle = setInterval(() => {
         if (step >= slideWidth) {
             clearInterval(intervalHandle);
 
-            enableButtons(true);
+            enableControlButtons(true);
+            enableDots(true);
             resetDots();
 
             ++index;
@@ -114,7 +122,7 @@ function nextButtonHandler() {
         }
         step += stepTo;
         track.style.transform = `translateX(${-(slideWidth * index) - step}px)`;
-    }, intervalValue);
+    }, INTERVAL_DELAY);
 }
 
 function dotButtonHandler(e) {
@@ -133,32 +141,34 @@ function moveTo(indexDiff) {
     const slides = getSlides();
     const slideWidth = slides[0].clientWidth;
 
-    if (slides[index].id === firstCloneId) {
+    if (slides[index].id === FIRST_CLONE_ID) {
         index = 1;
+        indexDiff += index;
         setDotActive(index);
         track.style.transform = `translateX(${-slideWidth * index}px)`;
-    } else if (slides[index].id === lastCloneId) {
+    } else if (slides[index].id === LAST_CLONE_ID) {
         index = slides.length - 2;
+        indexDiff -= index;
         setDotActive(index);
         track.style.transform = `translateX(${-slideWidth * index}px)`;
     }
 
-    enableButtons(false);
+    enableControlButtons(false);
+    enableDots(false);
 
     let step = 1;
+    let stepTo = STEP_TO;
     if (indexDiff < 0) {
         step = -1;
-        stepTo = -stepTo;
-    } else {
-        step = 1;
-        stepTo = (stepTo < 0) ? -stepTo : stepTo;
+        stepTo = -STEP_TO;
     }
 
     let intervalHandle = setInterval(() => {
         if (Math.abs(step) >= Math.abs(indexDiff) * slideWidth) {
             clearInterval(intervalHandle);
 
-            enableButtons(true);
+            enableControlButtons(true);
+            enableDots(true);
             resetDots();
 
             index += indexDiff;
@@ -175,7 +185,7 @@ function moveTo(indexDiff) {
         }
         step += stepTo;
         track.style.transform = `translateX(${-(slideWidth * index) - step}px)`;
-    }, intervalValue);
+    }, INTERVAL_DELAY);
 }
 
 function initSlides() {
@@ -183,11 +193,11 @@ function initSlides() {
     const slideWidth = slides[0].clientWidth;
 
     const firstClone = slides[0].cloneNode(true);
-    firstClone.id = firstCloneId;
+    firstClone.id = FIRST_CLONE_ID;
     track.append(firstClone);
 
     const lastClone = slides[slides.length - 1].cloneNode(true);
-    lastClone.id = lastCloneId;
+    lastClone.id = LAST_CLONE_ID;
     track.prepend(lastClone);
 
     track.style.width = `${slideWidth * slides.length + slideWidth  + slideWidth}px`;
