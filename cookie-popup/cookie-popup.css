@@ -42,7 +42,7 @@
     }
 }
 
-.ok-button {
+.cookie-popup__ok-button {
     background-color: rgba(255, 255, 255, .1);
     border: 1px solid #ffffff;
     border-radius: 6px;
@@ -54,7 +54,7 @@
 }
 
 @media screen and (max-width: 1280px) {
-    .ok-button {
+    .cookie-popup__ok-button {
         width: 92px;
         height: 50px;
     }
