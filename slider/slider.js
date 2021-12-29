@@ -133,22 +133,19 @@ function dotButtonHandler(e) {
     resetDots();
     setDotActive(e.currentTarget.id);
 
-    let diff = e.currentTarget.id - index;
-    moveTo(diff);
+    moveTo(e.currentTarget.id);
 }
 
-function moveTo(indexDiff) {
+function moveTo(selectedDotIndex) {
     const slides = getSlides();
     const slideWidth = slides[0].clientWidth;
 
     if (slides[index].id === FIRST_CLONE_ID) {
         index = 1;
-        indexDiff += index;
         setDotActive(index);
         track.style.transform = `translateX(${-slideWidth * index}px)`;
     } else if (slides[index].id === LAST_CLONE_ID) {
         index = slides.length - 2;
-        indexDiff -= index;
         setDotActive(index);
         track.style.transform = `translateX(${-slideWidth * index}px)`;
     }
@@ -158,20 +155,21 @@ function moveTo(indexDiff) {
 
     let step = 1;
     let stepTo = STEP_TO;
-    if (indexDiff < 0) {
+    selectedDotIndex -= index;
+    if (selectedDotIndex < 0) {
         step = -1;
         stepTo = -STEP_TO;
     }
 
     let intervalHandle = setInterval(() => {
-        if (Math.abs(step) >= Math.abs(indexDiff) * slideWidth) {
+        if (Math.abs(step) >= Math.abs(selectedDotIndex) * slideWidth) {
             clearInterval(intervalHandle);
 
             enableControlButtons(true);
             enableDots(true);
             resetDots();
 
-            index += indexDiff;
+            index += selectedDotIndex;
             if (index == 0) {
                 setDotActive(slides.length - 2);
             } else if (index == slides.length - 1) {
