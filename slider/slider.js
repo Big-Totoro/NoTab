@@ -208,6 +208,10 @@ function initControlButtons() {
 
     const nextButton = document.querySelector(".next");
     nextButton.addEventListener("click", nextButtonHandler);
+
+    if (getSlides().length == 0) {
+        enableControlButtons(false);
+    }
 }
 
 function createDots(number) {
