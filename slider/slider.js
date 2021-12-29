@@ -1,243 +1,255 @@
-const track = document.querySelector(".slider .track");
 const FIRST_CLONE_ID = 'first-clone';
 const LAST_CLONE_ID = 'last-clone';
 const STEP_TO = 30;
 const INTERVAL_DELAY = 10;
-let index = 1;
 
-function getSlides() {
-    return document.querySelectorAll(".slider .slide");
-}
+class Slider {
+    #index = 1;
+    #rootElement;
+    #track;
 
-function enableControlButtons(enabled) {
-    const prevButton = document.querySelector(".prev");
-    const nextButton = document.querySelector(".next");
+    constructor(rootElement) {
+        this.#rootElement = rootElement;
+        this.#track = rootElement.querySelector(".slider .track");
 
-    prevButton.disabled = !enabled;
-    nextButton.disabled = !enabled;
-}
-
-function getDot(index) {
-    return document.querySelector(`.dots-line div[id='${index}']`);
-}
-
-function getDots() {
-    return [...document.querySelectorAll(".dots-line .dot")];
-}
-
-function resetDots() {
-    const dots = getDots();
-    if (dots) {
-        dots.map(dot => dot.classList.remove("dot-active"));
-    }
-}
-
-function setDotActive(index) {
-    const dot = getDot(index);
-    if (dot) {
-        dot.classList.add("dot-active");
-    }
-}
-
-function enableDots(enabled) {
-    const dots = [...getDots()];
-    const pointerEvent = (enabled) ? "auto" : "none";
-    if (dots) {
-        dots.map(dot => dot.style.pointerEvents = pointerEvent);
-    }
-}
-
-function prevButtonHandler() {
-    const slides = getSlides();
-    const slideWidth = slides[0].clientWidth;
-
-    if (slides[index].id === LAST_CLONE_ID) {
-        index = slides.length - 2;
-        setDotActive(index);
-        track.style.transform = `translateX(${-slideWidth * index}px)`;
+        this.#initSlides();
+        this.#initControlButtons();
+        this.#initDotsLine();
     }
 
-    enableControlButtons(false);
-    enableDots(false);
+    #getSlides() {
+        return this.#rootElement.querySelectorAll(".slider .slide");
+    }
 
-    let step = 1;
-    let stepTo = STEP_TO;
+    #enableControlButtons(enabled) {
+        const prevButton = this.#rootElement.querySelector(".prev");
+        const nextButton = this.#rootElement.querySelector(".next");
 
-    let intervalHandle = setInterval(() => {
-        step += stepTo;
-        if (step >= slideWidth) {
-            clearInterval(intervalHandle);
+        prevButton.disabled = !enabled;
+        nextButton.disabled = !enabled;
+    }
 
-            enableControlButtons(true);
-            enableDots(true);
-            resetDots();
+    #getDot(dotIndex) {
+        return this.#rootElement.querySelector(`.dots-line div[id='${dotIndex}']`);
+    }
 
-            --index;
-            if (index == 0) {
-                setDotActive(slides.length - 2);
-            } else {
-                setDotActive(index);
-            }
-            track.style.transform = `translateX(${-slideWidth * index}px)`;
+    #getDots() {
+        return [...this.#rootElement.querySelectorAll(".dots-line .dot")];
+    }
 
-            return;
+    #resetDots() {
+        const dots = this.#getDots();
+        if (dots) {
+            dots.forEach(dot => dot.classList.remove("dot-active"));
         }
-        track.style.transform = `translateX(${-(slideWidth * index) + step}px)`;
-    }, INTERVAL_DELAY);
-}
-
-function nextButtonHandler() {
-    const slides = getSlides();
-    const slideWidth = slides[0].clientWidth;
-
-    if (slides[index].id === FIRST_CLONE_ID) {
-        index = 1;
-        setDotActive(index);
-        track.style.transform = `translateX(${-slideWidth * index}px)`;
     }
 
-    enableControlButtons(false);
-    enableDots(false);
-
-    let step = 1;
-    let stepTo = STEP_TO;
-
-    let intervalHandle = setInterval(() => {
-        step += stepTo;
-        if (step >= slideWidth) {
-            clearInterval(intervalHandle);
-
-            enableControlButtons(true);
-            enableDots(true);
-            resetDots();
-
-            ++index;
-            if (index == slides.length - 1) {
-                setDotActive(1);
-            } else {
-                setDotActive(index);
-            }
-            track.style.transform = `translateX(${-(slideWidth * index)}px)`;
-
-            return;
-        }
-        track.style.transform = `translateX(${-(slideWidth * index) - step}px)`;
-    }, INTERVAL_DELAY);
-}
-
-function dotButtonHandler(e) {
-    if (e.currentTarget.id == index) {
-        return;
-    }
-
-    resetDots();
-    setDotActive(e.currentTarget.id);
-
-    moveTo(e.currentTarget.id);
-}
-
-function moveTo(selectedDotIndex) {
-    const slides = getSlides();
-    const slideWidth = slides[0].clientWidth;
-
-    if (slides[index].id === FIRST_CLONE_ID) {
-        index = 1;
-        setDotActive(index);
-        track.style.transform = `translateX(${-slideWidth * index}px)`;
-    } else if (slides[index].id === LAST_CLONE_ID) {
-        index = slides.length - 2;
-        setDotActive(index);
-        track.style.transform = `translateX(${-slideWidth * index}px)`;
-    }
-
-    enableControlButtons(false);
-    enableDots(false);
-
-    let step = 1;
-    let stepTo = STEP_TO;
-    selectedDotIndex -= index;
-    if (selectedDotIndex < 0) {
-        step = -1;
-        stepTo = -STEP_TO;
-    }
-
-    let intervalHandle = setInterval(() => {
-        step += stepTo;
-        if (Math.abs(step) >= Math.abs(selectedDotIndex) * slideWidth) {
-            clearInterval(intervalHandle);
-
-            enableControlButtons(true);
-            enableDots(true);
-            resetDots();
-
-            index += selectedDotIndex;
-            if (index == 0) {
-                setDotActive(slides.length - 2);
-            } else if (index == slides.length - 1) {
-                setDotActive(1);
-            } else {
-                setDotActive(index);
-            }
-            track.style.transform = `translateX(${-(slideWidth * index)}px)`;
-
-            return;
-        }
-        track.style.transform = `translateX(${-(slideWidth * index) - step}px)`;
-    }, INTERVAL_DELAY);
-}
-
-function initSlides() {
-    const slides = getSlides();
-    const slideWidth = slides[0].clientWidth;
-
-    const firstClone = slides[0].cloneNode(true);
-    firstClone.id = FIRST_CLONE_ID;
-    track.append(firstClone);
-
-    const lastClone = slides[slides.length - 1].cloneNode(true);
-    lastClone.id = LAST_CLONE_ID;
-    track.prepend(lastClone);
-
-    track.style.width = `${slideWidth * slides.length + slideWidth  + slideWidth}px`;
-    track.style.transform = `translateX(${-slideWidth}px)`;
-}
-
-function initControlButtons() {
-    const prevButton = document.querySelector(".prev");
-    prevButton.addEventListener("click", prevButtonHandler);
-
-    const nextButton = document.querySelector(".next");
-    nextButton.addEventListener("click", nextButtonHandler);
-
-    if (getSlides().length == 0) {
-        enableControlButtons(false);
-    }
-}
-
-function createDots(number) {
-    const dotsLine = document.querySelector(".dots-line");
-    [...Array(number).keys()].forEach((_, index) => {
-        let dot = document.createElement("div");
-        dot.id = String(index + 1);
-        dot.classList.add("dot");
-        if (index == 0) {
+    #setDotActive(dotIndex) {
+        const dot = this.#getDot(dotIndex);
+        if (dot) {
             dot.classList.add("dot-active");
         }
-        dot.addEventListener("click", dotButtonHandler);
+    }
 
-        dotsLine.append(dot);
-    });
+    #enableDots(enabled) {
+        const dots = [...this.#getDots()];
+        const pointerEvent = (enabled) ? "auto" : "none";
+        if (dots) {
+            dots.forEach(dot => { dot.style.pointerEvents = pointerEvent; });
+        }
+    }
+
+    prevButtonHandler = (e) => {
+        const slides = this.#getSlides();
+        const slideWidth = slides[0].clientWidth;
+
+        if (slides[this.#index].id === LAST_CLONE_ID) {
+            this.#index = slides.length - 2;
+            this.#setDotActive(this.#index);
+            this.#track.style.transform = `translateX(${-slideWidth * this.#index}px)`;
+        }
+
+        this.#enableControlButtons(false);
+        this.#enableDots(false);
+
+        let step = 1;
+        let stepTo = STEP_TO;
+
+        let intervalHandle = setInterval(() => {
+            step += stepTo;
+            if (step >= slideWidth) {
+                clearInterval(intervalHandle);
+
+                this.#enableControlButtons(true);
+                this.#enableDots(true);
+                this.#resetDots();
+
+                --this.#index;
+                if (this.#index == 0) {
+                    this.#setDotActive(slides.length - 2);
+                } else {
+                    this.#setDotActive(this.#index);
+                }
+                this.#track.style.transform = `translateX(${-slideWidth * this.#index}px)`;
+
+                return;
+            }
+            this.#track.style.transform = `translateX(${-(slideWidth * this.#index) + step}px)`;
+        }, INTERVAL_DELAY);
+    }
+
+    nextButtonHandler = (e) => {
+        const slides = this.#getSlides();
+        const slideWidth = slides[0].clientWidth;
+
+        if (slides[this.#index].id === FIRST_CLONE_ID) {
+            this.#index = 1;
+            this.#setDotActive(this.#index);
+            this.#track.style.transform = `translateX(${-slideWidth * this.#index}px)`;
+        }
+
+        this.#enableControlButtons(false);
+        this.#enableDots(false);
+
+        let step = 1;
+        let stepTo = STEP_TO;
+
+        let intervalHandle = setInterval(() => {
+            step += stepTo;
+            if (step >= slideWidth) {
+                clearInterval(intervalHandle);
+
+                this.#enableControlButtons(true);
+                this.#enableDots(true);
+                this.#resetDots();
+
+                ++this.#index;
+                if (this.#index == slides.length - 1) {
+                    this.#setDotActive(1);
+                } else {
+                    this.#setDotActive(this.#index);
+                }
+                this.#track.style.transform = `translateX(${-(slideWidth * this.#index)}px)`;
+
+                return;
+            }
+            this.#track.style.transform = `translateX(${-(slideWidth * this.#index) - step}px)`;
+        }, INTERVAL_DELAY);
+    }
+
+    dotButtonHandler = (e) => {
+        if (e.currentTarget.id == this.#index) {
+            return;
+        }
+
+        this.#resetDots();
+        this.#setDotActive(e.currentTarget.id);
+
+        this.#moveTo(e.currentTarget.id);
+    }
+
+    #moveTo(selectedDotIndex) {
+        const slides = this.#getSlides();
+        const slideWidth = slides[0].clientWidth;
+
+        if (slides[this.#index].id === FIRST_CLONE_ID) {
+            this.#index = 1;
+            this.#setDotActive(this.#index);
+            this.#track.style.transform = `translateX(${-slideWidth * this.#index}px)`;
+        } else if (slides[this.#index].id === LAST_CLONE_ID) {
+            this.#index = slides.length - 2;
+            this.#setDotActive(this.#index);
+            this.#track.style.transform = `translateX(${-slideWidth * this.#index}px)`;
+        }
+
+        this.#enableControlButtons(false);
+        this.#enableDots(false);
+
+        let step = 1;
+        let stepTo = STEP_TO;
+        selectedDotIndex -= this.#index;
+        if (selectedDotIndex < 0) {
+            step = -1;
+            stepTo = -STEP_TO;
+        }
+
+        let intervalHandle = setInterval(() => {
+            step += stepTo;
+            if (Math.abs(step) >= Math.abs(selectedDotIndex) * slideWidth) {
+                clearInterval(intervalHandle);
+
+                this.#enableControlButtons(true);
+                this.#enableDots(true);
+                this.#resetDots();
+
+                this.#index += selectedDotIndex;
+                if (this.#index == 0) {
+                    this.#setDotActive(slides.length - 2);
+                } else if (this.#index == slides.length - 1) {
+                    this.#setDotActive(1);
+                } else {
+                    this.#setDotActive(this.#index);
+                }
+                this.#track.style.transform = `translateX(${-(slideWidth * this.#index)}px)`;
+
+                return;
+            }
+            this.#track.style.transform = `translateX(${-(slideWidth * this.#index) - step}px)`;
+        }, INTERVAL_DELAY);
+    }
+
+    #initSlides() {
+        const slides = this.#getSlides();
+        const slideWidth = slides[0].clientWidth;
+
+        const firstClone = slides[0].cloneNode(true);
+        firstClone.id = FIRST_CLONE_ID;
+        this.#track.append(firstClone);
+
+        const lastClone = slides[slides.length - 1].cloneNode(true);
+        lastClone.id = LAST_CLONE_ID;
+        this.#track.prepend(lastClone);
+
+        this.#track.style.width = `${slideWidth * slides.length + slideWidth  + slideWidth}px`;
+        this.#track.style.transform = `translateX(${-slideWidth}px)`;
+    }
+
+    #initControlButtons() {
+        const prevButton = this.#rootElement.querySelector(".prev");
+        prevButton.addEventListener("click", this.prevButtonHandler);
+
+        const nextButton = this.#rootElement.querySelector(".next");
+        nextButton.addEventListener("click", this.nextButtonHandler);
+
+        if (this.#getSlides().length == 0) {
+            this.#enableControlButtons(false);
+        }
+    }
+
+    #createDots(number) {
+        const dotsLine = this.#rootElement.querySelector(".dots-line");
+        [...Array(number).keys()].forEach((_, dotIndex) => {
+            let dot = document.createElement("div");
+            dot.id = String(dotIndex + 1);
+            dot.classList.add("dot");
+            if (dotIndex == 0) {
+                dot.classList.add("dot-active");
+            }
+            dot.addEventListener("click", this.dotButtonHandler);
+
+            dotsLine.append(dot);
+        });
+    }
+
+    #initDotsLine() {
+        const slides = this.#getSlides();
+        this.#createDots(slides.length - 2);
+    }
 }
 
-function initDotsLine() {
-    const slides = getSlides();
-    createDots(slides.length - 2);
-}
-
-function initSlider() {
-    initSlides();
-    initControlButtons();
-    initDotsLine();
-}
-
-window.onload = () => initSlider();
+const sliders = [];
+document.addEventListener("DOMContentLoaded", () => {
+    sliders.push(new Slider(document.getElementById("slider1")));
+    sliders.push(new Slider(document.getElementById("slider2")));
+    sliders.push(new Slider(document.getElementById("slider3")));
+});
