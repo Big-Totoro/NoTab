@@ -64,6 +64,7 @@ function prevButtonHandler() {
     let stepTo = STEP_TO;
 
     let intervalHandle = setInterval(() => {
+        step += stepTo;
         if (step >= slideWidth) {
             clearInterval(intervalHandle);
 
@@ -81,7 +82,6 @@ function prevButtonHandler() {
 
             return;
         }
-        step += stepTo;
         track.style.transform = `translateX(${-(slideWidth * index) + step}px)`;
     }, INTERVAL_DELAY);
 }
@@ -103,6 +103,7 @@ function nextButtonHandler() {
     let stepTo = STEP_TO;
 
     let intervalHandle = setInterval(() => {
+        step += stepTo;
         if (step >= slideWidth) {
             clearInterval(intervalHandle);
 
@@ -120,7 +121,6 @@ function nextButtonHandler() {
 
             return;
         }
-        step += stepTo;
         track.style.transform = `translateX(${-(slideWidth * index) - step}px)`;
     }, INTERVAL_DELAY);
 }
@@ -162,6 +162,7 @@ function moveTo(selectedDotIndex) {
     }
 
     let intervalHandle = setInterval(() => {
+        step += stepTo;
         if (Math.abs(step) >= Math.abs(selectedDotIndex) * slideWidth) {
             clearInterval(intervalHandle);
 
@@ -181,7 +182,6 @@ function moveTo(selectedDotIndex) {
 
             return;
         }
-        step += stepTo;
         track.style.transform = `translateX(${-(slideWidth * index) - step}px)`;
     }, INTERVAL_DELAY);
 }
