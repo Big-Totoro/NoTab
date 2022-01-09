@@ -19,10 +19,18 @@ class Slider {
         this.#initDotsLine();
     }
 
+    /**
+     * Returns all slides elements
+     * @returns {NodeListOf<HTMLElementTagNameMap[string]> | NodeListOf<Element> | NodeListOf<SVGElementTagNameMap[string]>}
+     */
     #getSlides() {
         return this.#rootElement.querySelectorAll(".slider .slide");
     }
 
+    /**
+     * Changes enable state of the Left/Right buttons
+     * @param enabled
+     */
     #enableControlButtons(enabled) {
         const prevButton = this.#rootElement.querySelector(".prev");
         const nextButton = this.#rootElement.querySelector(".next");
@@ -31,14 +39,26 @@ class Slider {
         nextButton.disabled = !enabled;
     }
 
+    /**
+     * Returns the dot element with the specific index
+     * @param dotIndex
+     * @returns {any}
+     */
     #getDot(dotIndex) {
         return this.#rootElement.querySelector(`.dots-line div[id='${dotIndex}']`);
     }
 
+    /**
+     * Returns all dot elements
+     * @returns {*[]}
+     */
     #getDots() {
         return [...this.#rootElement.querySelectorAll(".dots-line .dot")];
     }
 
+    /**
+     * Sets all dot elements to inactive state
+     */
     #resetDots() {
         const dots = this.#getDots();
         if (dots) {
@@ -46,6 +66,10 @@ class Slider {
         }
     }
 
+    /**
+     * Sets the specific element with the index as active
+     * @param dotIndex
+     */
     #setDotActive(dotIndex) {
         const dot = this.#getDot(dotIndex);
         if (dot) {
@@ -53,6 +77,10 @@ class Slider {
         }
     }
 
+    /**
+     * Changes enable state of the dot elements
+     * @param enabled
+     */
     #enableDots(enabled) {
         const dots = [...this.#getDots()];
         const pointerEvent = (enabled) ? "auto" : "none";
@@ -61,15 +89,49 @@ class Slider {
         }
     }
 
+    /**
+     * Moves the slide with the specific index by the slideWidth
+     * @param slideWidth
+     * @param slideIndex
+     */
     #moveSlide(slideWidth, slideIndex) {
         this.#track.style.transform = `translateX(${-slideWidth * slideIndex}px)`;
     }
 
+    /**
+     * Moves the slide by small step (pixels)
+     * @param slideWidth
+     * @param slideIndex
+     * @param step
+     */
     #moveSlideWithStep(slideWidth, slideIndex, step) {
         this.#track.style.transform = `translateX(${-(slideWidth * this.#index) + step}px)`;
     }
 
-    #moveStep(buttonType) {
+    /**
+     * Disables Previous/Next control buttons and Dots
+     */
+    #doBefore = () => {
+        this.#enableControlButtons(false);
+        this.#enableDots(false);
+    }
+
+    /**
+     * Enables Previous/Next control buttons and Dots
+     */
+    #doAfter = () => {
+        this.#enableControlButtons(true);
+        this.#enableDots(true);
+        this.#resetDots();
+    }
+
+    /**
+     * Performs the slide moving with animation by clicking on the Previous/Next buttons
+     * @param buttonType is Previous or Next button that was clicked by the user
+     * @param beforeAction is the action before the animation will be started
+     * @param afterAction is the action upon the animation completion
+     */
+    #moveStep(buttonType, beforeAction, afterAction) {
         const slides = this.#getSlides();
         const slideWidth = slides[0].clientWidth;
 
@@ -83,8 +145,7 @@ class Slider {
             this.#moveSlide(slideWidth, this.#index);
         }
 
-        this.#enableControlButtons(false);
-        this.#enableDots(false);
+        beforeAction();
 
         let step = 1;
         let stepTo = STEP_TO;
@@ -94,9 +155,7 @@ class Slider {
             if (step >= slideWidth) {
                 clearInterval(intervalHandle);
 
-                this.#enableControlButtons(true);
-                this.#enableDots(true);
-                this.#resetDots();
+                afterAction();
 
                 if (buttonType == PREV_BUTTON) {
                     --this.#index;
@@ -125,14 +184,26 @@ class Slider {
         }, INTERVAL_DELAY);
     }
 
+    /**
+     * Previous button click handler
+     * @param e
+     */
     prevButtonHandler = (e) => {
-        this.#moveStep(PREV_BUTTON);
+        this.#moveStep(PREV_BUTTON, this.#doBefore, this.#doAfter);
     }
 
+    /**
+     * Next button click handler
+     * @param e
+     */
     nextButtonHandler = (e) => {
-        this.#moveStep(NEXT_BUTTON);
+        this.#moveStep(NEXT_BUTTON, this.#doBefore, this.#doAfter);
     }
 
+    /**
+     * Dot button click handler
+     * @param e
+     */
     dotButtonHandler = (e) => {
         if (e.currentTarget.id == this.#index) {
             return;
@@ -141,10 +212,16 @@ class Slider {
         this.#resetDots();
         this.#setDotActive(e.currentTarget.id);
 
-        this.#moveTo(e.currentTarget.id);
+        this.#moveTo(e.currentTarget.id, this.#doBefore, this.#doAfter);
     }
 
-    #moveTo(selectedDotIndex) {
+    /**
+     * Performs the slide moving with animation by clicking on the dot buttons
+     * @param selectedDotIndex
+     * @param beforeAction is the action before the animation will be started
+     * @param afterAction is the action upon the animation completion
+     */
+    #moveTo(selectedDotIndex, beforeAction, afterAction) {
         const slides = this.#getSlides();
         const slideWidth = slides[0].clientWidth;
 
@@ -158,8 +235,7 @@ class Slider {
             this.#moveSlide(slideWidth, this.#index);
         }
 
-        this.#enableControlButtons(false);
-        this.#enableDots(false);
+        beforeAction();
 
         let step = 1;
         let stepTo = STEP_TO;
@@ -174,9 +250,7 @@ class Slider {
             if (Math.abs(step) >= Math.abs(selectedDotIndex) * slideWidth) {
                 clearInterval(intervalHandle);
 
-                this.#enableControlButtons(true);
-                this.#enableDots(true);
-                this.#resetDots();
+                afterAction();
 
                 this.#index += selectedDotIndex;
                 if (this.#index == 0) {
@@ -194,6 +268,9 @@ class Slider {
         }, INTERVAL_DELAY);
     }
 
+    /**
+     * Initializes Slides
+     */
     #initSlides() {
         const slides = this.#getSlides();
         const slideWidth = slides[0].clientWidth;
@@ -210,6 +287,9 @@ class Slider {
         this.#track.style.transform = `translateX(${-slideWidth}px)`;
     }
 
+    /**
+     * Initializes Previous/Next buttons
+     */
     #initControlButtons() {
         const prevButton = this.#rootElement.querySelector(".prev");
         prevButton.addEventListener("click", this.prevButtonHandler);
@@ -222,6 +302,10 @@ class Slider {
         }
     }
 
+    /**
+     * Creates dot elements
+     * @param number of dot elements
+     */
     #createDots(number) {
         const dotsLine = this.#rootElement.querySelector(".dots-line");
         [...Array(number).keys()].forEach((_, dotIndex) => {
@@ -237,6 +321,9 @@ class Slider {
         });
     }
 
+    /**
+     * Initializes dots
+     */
     #initDotsLine() {
         const slides = this.#getSlides();
         this.#createDots(slides.length - 2);
